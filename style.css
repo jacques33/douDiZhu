@@ -1,0 +1,347 @@
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #f5f5f5;
+}
+
+#current-cards-area {
+    position: absolute;
+    bottom: 550px;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    text-align: center;
+}
+.hover-gray{
+    position: absolute;
+    top: 0;
+    left: 30%;
+    height: 60px;
+    width: 900px;
+    z-index: 9;
+}
+#current-cards-area .card {
+    width: 150px;
+    height: 220px;
+}
+
+#control-area {
+    position: absolute;
+    bottom: 360px;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    text-align: center;
+}
+
+.current-user {
+    display: inline-block;
+    position: relative;
+    left: -100px;
+    vertical-align: middle;
+}
+.current-user img{
+    width: 40px;
+    vertical-align: middle;
+}
+.current-user-role {
+    font-size: 22px;
+    color: #1f8d04;
+    font-weight: bold;
+    margin-left: 5px;
+    display: inline-block;vertical-align: middle;
+}
+
+.current-user-name {
+    font-size: 16px;
+    color: #222;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.btn {
+    width: 100px;
+    height: 40px;
+    background-color: #fff;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    color: #fff;
+    border-radius: 4px;
+    margin-left: 50px;
+}
+.btn:disabled{
+    filter: grayscale(.6);
+}
+.btn-reChoose {
+    background-color: #2e84f8;
+}
+
+.btn-pass {
+    background-color: #ff6216;
+}
+
+.btn-submit {
+    background-color: #078f07;
+}
+
+.btn-tip {
+    background-color: #05b0cd;
+}
+
+#cards-area {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 310px;
+}
+
+.card {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 300px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: -2px 3px 8px rgba(0, 0, 0, .2);
+    transition: all .2s;
+}
+
+.pre-card {
+    top: -40px;
+    transition: all .2s;
+}
+
+.card-num {
+    position: absolute;
+    top: 5px;
+    left: 12px;
+    font-size: 32px;
+    font-weight: bolder;
+    color: #000;
+    font-family: cursive;
+}
+
+.card .bl {
+    top: auto;
+    left: auto;
+    bottom: 5px;
+    right: 12px;
+}
+
+.card-color {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    margin-top: -50px;
+    margin-left: -50px;
+}
+
+.card-color-min {
+    position: absolute;
+    top: 40px;
+    left: 12px;
+    width: 18px;
+}
+
+.card-color-min-bl {
+    position: absolute;
+    bottom: 40px;
+    right: 12px;
+    width: 18px;
+}
+
+.color-A, .color-C {
+    color: black;
+}
+
+.color-B, .color-D {
+    color: #e50a11;
+}
+
+.num-10 {
+    letter-spacing: -5px;
+    left: 5px;
+}
+
+.modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .5);
+    transition: all .3s;
+    z-index: 999;
+    display: none;
+}
+
+.modal .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 100px;
+    margin-left: -150px;
+    margin-top: -50px;
+    background-color: #fff;
+    border-radius: 10px;
+    line-height: 100px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #4785F9;
+    text-align: center;
+    display: none;
+}
+
+.btn-onemore {
+    display: block;
+    margin: 0 auto;
+}
+.ccu {
+    position: absolute;
+    bottom: 800px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+
+.others-area{
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 100px;
+    height: 100%;
+    text-align: center;
+}
+.right-user{
+    left: auto;
+    right: 30px;
+}
+.o-card{
+    position: absolute;
+    left: 0;
+    top: 80px;
+    width: 100px;
+    height: 150px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: -1px -3px 8px rgba(0, 0, 0, .2);
+    transform-origin: center center;
+    transition: all .2s;
+}
+.right-user .o-card{
+
+}
+
+.o-card .card-color{
+    width: 46px;
+    margin-top: -23px;
+    margin-left: -23px;
+}
+.o-card .card-num{
+    font-size: 18px;
+    left: 5px;
+    top: 0;
+}
+.o-card .bl{
+    top: auto;
+    left: auto;
+    bottom: 0;
+    right: 5px;
+}
+.o-card .card-color-min{
+    width: 10px;
+    top: 18px;
+    left: 5px;
+}
+.o-card .card-color-min-bl{
+    width: 10px;
+    bottom: 20px;
+    right: 5px;
+}
+
+.left-role{
+    position: absolute;
+    top: 10px;
+    left: 40px;
+}
+.right-role{
+    position: absolute;
+    top: 10px;
+    right: 40px;
+}
+.left-role img,.right-role img{
+    width: 40px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.left-role strong,.right-role strong{
+    font-size: 22px;
+    color: #1f8d04;
+    display: inline-block;vertical-align: middle;
+}
+
+.back-card{
+    background: url('./img/back.jpg') 0 0 no-repeat;
+    background-size: 100% 100%;
+}
+.bell{
+    position: absolute;
+    top: 200px;
+    left: 200px;
+    width: 80px;
+}
+.tip{
+    position: absolute;
+    top:0;
+    left: 50%;
+    width: 300px;
+    height: 60px;
+    margin-left: -150px;
+    background-color: #639d0a;
+    color: #fff;
+    line-height: 60px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    display: none;
+}
+.choosePlayType{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    text-align: center;
+}
+.choosePlayType p{
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+}
+.choosePlayType-pane{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    width: 300px;
+    padding: 50px;
+    margin-left: -150px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 30px rgba(0,0,0,0.6);
+}
+.choosePlayType .btn{
+   background-color: #4785F9;
+    margin: 10px 15px;
+}
+.choosePlayType .btn:last-of-type{
+    /*margin-left: 180px;*/
+}

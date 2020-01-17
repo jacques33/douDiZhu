@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>斗地主算法</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="choosePlayType">
+    <div class="choosePlayType-pane">
+        <p>请选择游戏方式</p>
+        <button class="btn" type="1" onclick="choosePlayType(this,event)">电脑明牌</button>
+        <button class="btn" type="2" onclick="choosePlayType(this,event)">电脑暗牌</button>
+    </div>
+</div>
+<h4 class="ccu">出牌人：<span class="current-card-username"></span></h4>
+<div id="current-cards-area">
+
+</div>
+<div id="control-area">
+    <p class="current-user">
+        <img src="img/landlord.jpg">
+        <span class="current-user-role">地主</span>
+    </p>
+    <button class="btn btn-reChoose" onclick="reChooseCards()">重新选牌</button>
+    <button class="btn btn-tip" onclick="realPlayerAutoChooseCard()">提示</button>
+    <button class="btn btn-pass" onclick="pass()">不要</button>
+    <button class="btn btn-submit" onclick="submitCards()">出牌</button>
+</div>
+<div id="cards-area">
+
+</div>
+<div class="left-role">
+    <img src="./img/famer.jpg">
+    <strong>农民</strong>
+</div>
+<div class="right-role">
+    <img src="./img/landlord.jpg">
+    <strong>地主</strong>
+</div>
+<div class="others-area left-user">
+</div>
+<div class="others-area right-user">
+</div>
+<img class="bell" src="img/bell.jpg">
+<div class="modal">
+    <div class="content">
+    </div>
+</div>
+<div class="tip"></div>
+<script src="./main.js"></script>
+</body>
+</html>
