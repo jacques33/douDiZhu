@@ -60,6 +60,8 @@ function divideCards() {
     // 洗牌算法
     for(var len=allCards.length-1,i=len;i>0;i--){
         let tempKey = Math.floor(Math.random()*(i+1));
+        if(tempKey === i) continue;
+        
         let temp = allCards[i];
         allCards[i] = allCards[tempKey]
         allCards[tempKey] = temp;
