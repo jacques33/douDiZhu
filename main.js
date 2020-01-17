@@ -61,7 +61,7 @@ function divideCards() {
     for(var len=allCards.length-1,i=len;i>0;i--){
         let tempKey = Math.floor(Math.random()*(i+1));
         if(tempKey === i) continue;
-        
+
         let temp = allCards[i];
         allCards[i] = allCards[tempKey]
         allCards[tempKey] = temp;
@@ -116,8 +116,7 @@ function whoIsDizhu() {
         computerAutoPlay(1)
     }
     current_user.role = '地主';
-    current_card_user.name = current_user.name;
-    current_card_user.role = current_user.role;
+    current_card_user = current_user;
     drawAllCards();
 }
 
@@ -507,8 +506,7 @@ function submitCards() {
             }
         }
         current_card = user_choosed_card;
-        current_card_user.name = current_user.name;
-        current_card_user.role = current_user.role;
+        current_card_user = current_user;
         $('.current-card-username').html(current_card_user.name).parent().show();
         drawCurrentCards(user_choosed_card);
         drawUserCards(current_user.cards);
@@ -543,7 +541,7 @@ function autoChooseCard(index) {
     }
     // 升序排序
     arr.sort(function (a, b) {
-        return a > b ? 1 : -1
+        return a - b
     });
     // 先将牌放入一个对象中，例如 牌是 三个6三个7 带一8 带一9  66677798，
     // 那么这个对象就是{6:3, 7:3, 9:1, 8:1}, key为牌，value为相同牌的张数
@@ -1045,7 +1043,7 @@ function disabledButtons() {
     $('#control-area').find('.btn').attr('disabled', 'disabled');
 }
 
-// 玩家的按钮操作区置灰，且不可操作
+// 玩家的按钮操作区恢复，可操作
 function recoverButtons() {
     $('#control-area').find('.btn').removeAttr('disabled');
 }
@@ -1086,15 +1084,14 @@ function computerAutoPlay(index) {
                 }
             }
             current_card = user_choosed_card;
-            current_card_user.name = current_user.name;
-            current_card_user.role = current_user.role;
+            current_card_user = current_user;
             $('.current-card-username').html(current_card_user.name).parent().show();
             curr_player.cards = newCards;
             drawCurrentCards(user_choosed_card);
             drawComputorCards(index,curr_player.cards);
         }
         changeCurrentUser();
-    },3000);
+    },2000);
 }
 
 /** 牌型检测,返回对应牌型代号和牌面值
@@ -1252,13 +1249,17 @@ function findBigBangInCard(obj) {
             num++;
         }
     });
-    return num == 2
+    return num === 2
 }
 
 // 用炸弹压制对面的牌的流程(如果对面也是炸弹就传入值val)
 function bombBang(val,cards,dom) {
     // 如果上家是对手，就拆牌压制；队友的话不要；
-    if (current_card_user.role == current_user.role) {
+    if (current_card_user.role === current_user.role) {
+        showTip('不 要');
+        return
+        // 如果对手出的牌不是炸弹，且还剩5张以上的牌，则不用炸弹压制
+    }else if(val === 0 && current_card_user.cards.length>5){
         showTip('不 要');
         return
     }
@@ -1319,9 +1320,7 @@ function bringCards(array, type, num,obj) {
 /** 王炸 */
 function isBigBang(arr) {
     if (arr.length == 2) {
-        var c1 = parseInt(arr[0].substring(1));
-        var c2 = parseInt(arr[1].substring(1));
-        if (c1 >= 20 && c2 >= 20) {
+        if (parseInt(arr[0].substring(1)) >= 20 && parseInt(arr[1].substring(1)) >= 20) {
             return true;
         }
     }
@@ -1331,13 +1330,7 @@ function isBigBang(arr) {
 /** 炸弹(不含王炸) */
 function isBomb(arr) {
     if (arr.length == 4) {
-        var c1 = parseInt(arr[0].substring(1));
-        var c2 = parseInt(arr[1].substring(1));
-        var c3 = parseInt(arr[2].substring(1));
-        var c4 = parseInt(arr[3].substring(1));
-        if (c1 == c2 && c2 == c3 && c3 == c4) {
-            return true;
-        }
+        return arr[0].substring(1) === arr[1].substring(1) && arr[1].substring(1) === arr[2].substring(1) && arr[2].substring(1) === arr[3].substring(1);
     }
     return false
 }
@@ -1357,7 +1350,7 @@ function isThreePlusOne(array) {
     }
     // 排序
     arr.sort(function (a, b) {
-        return a > b ? 1 : -1
+        return a - b
     });
     // 前三张或后三张相等，则是三带一
     if (arr[0] == arr[1] && arr[1] == arr[2] && arr[2] != arr[3]) {
@@ -1458,7 +1451,8 @@ function isBombWithCards(array) {
 /** ===飞机带牌====
  * type: AAABBB,  AAABBB c d,   AAABBB cc dd
  * 三飞机四飞机都要考虑。。。
- * 不是则返回false，如果是则返回飞机中A的值*/
+ * 不是则返回false，如果是则返回飞机中A的值
+ */
 function isPlaneWithCards(array) {
     if (array.length < 6) {
         return false
@@ -1528,22 +1522,22 @@ function isContinuousPairCards(array) {
         }
         // 升序排序
         arr.sort(function (a, b) {
-            return a > b ? 1 : -1
+            return a - b 
         });
         // 连对不能有2或者王(排序后只需要判断最后一张牌是否大于等于2的值)
         if (arr[arr.length - 1] > 14) {
             return false
         }
-        // 比较相邻两个是否相等
-        for (var i = 0; i < arr.length; i += 2) {
+        for (var i = 0; i < arr.length-1; i += 2) {
+            // 比较相邻两个是否相等
             if (arr[i] != arr[i + 1]) {
                 return false
             }
-        }
-        // 比较隔两张是否等差1
-        for (var i = 0; i + 2 < arr.length; i += 2) {
-            if (arr[i] + 1 != arr[i + 2]) {
-                return false
+            if(i<arr.length-2){
+                // 比较隔两张是否等差1
+                if (arr[i] + 1 != arr[i + 2]) {
+                    return false
+                }
             }
         }
         return arr[0]
@@ -1566,7 +1560,7 @@ function isContinuousCards(array) {
         }
         // 升序排序
         arr.sort(function (a, b) {
-            return a > b ? 1 : -1
+            return a - b
         });
         // 顺子不能有2或者王(排序后只需要判断最后一张牌是否大于等于2的值)
         if (arr[arr.length - 1] > 14) {
