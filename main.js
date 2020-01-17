@@ -33,10 +33,12 @@ function choosePlayType(obj,e) {
     init(type);
     $(obj).parents('.choosePlayType').fadeOut();
 }
+// 再来一局
 function oneMoreGame(obj,e) {
     $(obj).parents('.modal ').hide();
     $('.choosePlayType').fadeIn();
 }
+// 初始化数据
 function init(type) {
     type == '1'?isShow=true:isShow=false;
     current_user = {};
